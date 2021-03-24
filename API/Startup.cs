@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Infrastructure.Container;
 using Infrastructure.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace API
             services.AddMvc();
             var builder = new ContainerBuilder();
             builder.Populate(services);
+            builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(ApplicationContainer);
         }
@@ -42,8 +44,11 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             applicationLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }

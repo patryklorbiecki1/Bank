@@ -2,6 +2,7 @@
 using Infrastructure.Commands;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Infrastructure.Container
@@ -10,7 +11,7 @@ namespace Infrastructure.Container
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(CommandModule).GetType().Assembly;
+            var assembly = typeof(CommandModule).GetTypeInfo().Assembly;
             builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>)).InstancePerLifetimeScope();
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>().InstancePerLifetimeScope();
         }

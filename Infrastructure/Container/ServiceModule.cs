@@ -2,6 +2,7 @@
 using Infrastructure.Services;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Infrastructure.Container
@@ -10,7 +11,7 @@ namespace Infrastructure.Container
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(ServiceModule).GetType().Assembly;
+            var assembly = typeof(ServiceModule).GetTypeInfo().Assembly;
             builder.RegisterAssemblyTypes(assembly).Where(x => x.IsAssignableTo<IService>())
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
 
