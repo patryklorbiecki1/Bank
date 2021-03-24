@@ -9,7 +9,7 @@ namespace Domain.Repositories
     {
         Task AddClient(Client client);
         Task<Client> GetClient(string email);
-        Task DeleteById(string email);
+        Task DeleteByEmail(string email);
         Task<IEnumerable<Client>> GetAll();
         Task UpdateClient(Client client);
     }

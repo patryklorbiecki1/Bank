@@ -9,6 +9,8 @@ namespace Infrastructure.Services
     public interface IClientService : IService
     {
         Task<IEnumerable<Client>> GetAllClient();
-        Task CreateClient();
+        Task CreateClient(string email, string password, string name, string lastname);
+        Task DeleteClient(string email);
+        Task<Client> GetClientByEmail(string email);
     }
 }

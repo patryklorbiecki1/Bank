@@ -14,13 +14,20 @@ namespace Infrastructure.Services
         {
             _clientRepository = clientRepository;
         }
-        public Task CreateClient()
+        public async Task CreateClient(string email,string password,string name,string lastname)
         {
-           throw new NotImplementedException();
+            await _clientRepository.AddClient(new Client(email, password, name, lastname));
+        }
+
+        public async Task DeleteClient(string email)
+        {
+            await _clientRepository.DeleteByEmail(email);
         }
 
         public async Task<IEnumerable<Client>> GetAllClient()
-        =>  await _clientRepository.GetAll();
-        
+            => await _clientRepository.GetAll();
+
+        public async Task<Client> GetClientByEmail(string email)
+            => await _clientRepository.GetClient(email);
     }
 }

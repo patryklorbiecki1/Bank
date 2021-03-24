@@ -13,6 +13,20 @@ namespace Domain
         public string AccountNumber { get; protected set; }
         public string Password { get; protected set; }
         public string Email { get; protected set; }
+
+        public Client(string email, string password,string name,string lastname)
+        {
+            Email = email;
+            Password = password;
+            Name = name;
+            LastName = lastname;
+            IdentityNumber = Guid.NewGuid();
+            Amount = 0;
+            var random = new Random();
+            AccountNumber = string.Empty;
+            for (int i = 0; i < 26; i++)
+                AccountNumber = String.Concat(AccountNumber, random.Next(10).ToString());
+        }
        
     }
 }

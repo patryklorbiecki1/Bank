@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories
             _context.InsertOne(client);
             await Task.CompletedTask;
         }
-        public async Task DeleteById(string email)
+        public async Task DeleteByEmail(string email)
         {
             await Task.FromResult(_context.DeleteOne(c => c.Email == email));
         }
